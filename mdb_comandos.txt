@@ -1,0 +1,54 @@
+alunosenacrio
+./mongosh "mongodb+srv://cluster-uc1.vmrsplf.mongodb.net/" --apiVersion 1 --username murilodores
+
+use sample_mflix
+show
+show collections
+db.movies.countDocuments ()
+db.movies.findOne()
+db.comments.findOne()
+
+db.movies.find({
+  "imdb.rating": { $gt: 8.5 }
+}, {
+  title: 1,
+  "imdb.rating": 1,
+  _id: 0
+}).limit(5)
+
+db.movies.find({
+  imdb.rating: { $gt: 8.5 }
+}, {
+  title: 1,
+  "imdb.rating": 1,
+  _id: 0
+}).limit(5)//erro
+
+db.movies.find({
+  year:2015
+}, {
+  title: 1,
+  year: 1,
+  genres: 1,
+  _id: 0
+}).limit(5)
+
+db.movies.countDocuments({
+  genres: { $size: 3 }
+})
+
+db.movies.find({
+  genres: { $size: 3 }
+}, {
+  title: 1,
+  year: 1,
+  genres: 1,
+  _id: 0
+}).limit(5)
+
+db.movies.aggregate([
+  { $match: { "imdb.rating" ; {$exists: true } } },
+  { $sort: { "imdb.rating": -1 } },
+  { $ limit: 5}
+])
+
