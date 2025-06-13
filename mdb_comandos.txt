@@ -52,3 +52,96 @@ db.movies.aggregate([
   { $ limit: 5}
 ])
 
+use sample_mflix
+db.movies.findOne()
+db.movies.find({title: "The Dark Night"}, {title: 1, year: 1, genres: 1, _id: 0}).pretty()
+db.movies.find({ title: "The Dark Knight" }, { title: 1, year: 1, genres: 1 }).pretty()
+
+// Primeiro, obter o _id do filme
+var movie = db.movies.findOne({ title: "The Dark Knight" });
+// Agora buscar todos os comentários desse filme
+db.comments.find({ movie_id: movie._id }, { name: 1, text: 1, _id: 0 });
+db.comments.find({ movie_id: movie._id }, { year: 1, name: 1, text: 1, _id: 0 }).limit(5);
+
+db.movies.aggregate([
+  {
+    $match: { title: "The Dark Knight" }
+  },
+  {
+    $lookup: {
+      from: "comments",
+      localField: "_id",
+      foreignField: "movie_id",
+      as: "comentarios"
+    }
+  },
+  {
+    $project: {
+      title: 1,
+      comentarios_count: { $size: "$comentarios" },
+      _id: 0
+    }
+  }
+]);
+
+db.movies.find(
+  {
+    "imdb.rating": {
+      $exists: true,
+      $ne: null,
+      $ne: ""
+    }
+  },
+  {
+    title: 1,
+    year: 1,
+    "imdb.rating": 1,
+    _id: 0
+  }
+)
+  .sort({ "imdb.rating": -1 })
+  .limit(5)
+  .pretty();
+
+db.movies.createIndex({ "imdb.rating": -1 });
+
+db.movies.aggregate([
+  {
+    $match: { title: "The Dark Knight" }
+  },
+  {
+    $lookup: {
+      from: "comments",
+      localField: "_id",
+      foreignField: "movie_id",
+      as: "comentarios"
+    }
+  },
+  {
+    $project: {
+      title: 1,
+      comentarios_count: { $size: "$comentarios" },
+      _id: 0
+    }
+  }
+]);
+
+db.movies.find(
+  {
+    "imdb.rating": {
+      $exists: true,
+      $ne: null,
+      $ne: ""
+    }
+  },
+  {
+    title: 1,
+    year: 1,
+    "imdb.rating": 1,
+    _id: 1
+  }
+)
+  .sort({ "imdb.rating": -1 })
+  .limit(5)
+  .pretty();
+

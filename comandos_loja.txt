@@ -1,0 +1,134 @@
+use loja
+
+db.clientes.insertMany([
+  {
+    nome: "João Silva",
+    email: "joao@email.com",
+    idade: 28,
+    cidade: "São Paulo"
+  },
+  {
+    nome: "Ana Souza",
+    email: "ana@email.com",
+    idade: 35,
+    cidade: "Rio de Janeiro"
+  },
+  {
+    nome: "Carlos Pereira",
+    email: "carlos@email.com",
+    idade: 42,
+    cidade: "São Paulo"
+  }
+])
+db.clientes.insertMany([
+  {
+    nome: "Lena Vidal",
+    email: "lovidal@email.com",
+    idade: 30,
+    cidade: "Curitiba"
+  },
+  {
+    nome: "Jean Lermen",
+    email: "jpl@email.com",
+    idade: 27,
+    cidade: "Cascavel"
+  },
+  {
+    nome: "José Felipe Camargo",
+    email: "jfcamargo@email.com",
+    idade: 24,
+    cidade: "Goiânia"
+  },
+  {
+    nome: "Nikki Motta",
+    email: "nmtt@email.com",
+    idade: 28,
+    cidade: "Petrópolis"
+  },
+  {
+    nome: "Alan Souza",
+    email: "ana@email.com",
+    idade: 44,
+    cidade: "Belém"
+  },
+  {
+    nome: "Luiz Henrique",
+    email: "lhbezerra@email.com",
+    idade: 28,
+    cidade: "Recife"
+  },
+  {
+    nome: "Esmeralda Hans",
+    email: "ehans@email.com",
+    idade: 78,
+    cidade: "Estrela"
+  },
+  {
+    nome: "Steffany",
+    email: "stfany@email.com",
+    idade: 35,
+    cidade: "Recife"
+  },
+  {
+    nome: "Claudia Gaeger",
+    email: "cgaegers@email.com",
+    idade: 62,
+    cidade: "Campo Grande"
+  },
+  {
+    nome: "Mary Silva",
+    email: "msilva@email.com",
+    idade: 68,
+    cidade: "Rio Branco"
+  },
+  {
+    nome: "Sandro Cabral",
+    email: "scabral@email.com",
+    idade: 65,
+    cidade: "Rio de Janeiro"
+  },
+  {
+    nome: "Lucas Luz",
+    email: "lluz@email.com",
+    idade: 30,
+    cidade: "Belo Horizonte"
+  },
+  {
+    nome: "Rafael Souza",
+    email: "rsouza@email.com",
+    idade: 35,
+    cidade: "Nova Iguaçú"
+  },
+  {
+    nome: "Lucas Santtana",
+    email: "lsantana@email.com",
+    idade: 34,
+    cidade: "Campo Grande"
+  },
+  {
+    nome: "Gilberto Carlos",
+    email: "gcarlos@email.com",
+    idade: 84,
+    cidade: "Cachoeiro de Itapemerim"
+  }
+])
+
+db.clientes.find()
+db.clientes.find({ cidade: "Campo Grande" })
+db.clientes.find({ cidade: "Campo Grande", idade: 62 })
+db.clientes.updateOne(
+  { email: "nmtt@email.com" },
+  { $set: { idade: 29 } }
+)
+db.clientes.find({ email: "nmtt@email.com"  })
+db.clientes.find()
+db.clientes.updateMany(
+  {},
+  { $inc: { idade: 1 } }
+)
+db.clientes.find()
+db.clientes.find({ email: "cgaegers@email.com" })
+db.clientes.deleteOne({ email: "cgaegers@email.com" })
+db.clientes.find()
+
+Testar 3.1 e 3.2 em casa
