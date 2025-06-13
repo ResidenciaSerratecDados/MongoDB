@@ -1,0 +1,66 @@
+use escola
+db.createCollection("alunos")
+
+db.alunos.insertMany([
+  {
+    nome: "João Silva",
+    idade: 20,
+    turma: "A",
+    notas: [8.5, 9.0, 7.0]
+  },
+  {
+    nome: "Maria Oliveira",
+    idade: 17,
+    turma: "B",
+    notas: [9.0, 8.5, 9.5]
+  },
+  {
+    nome: "Carlos Mendes",
+    idade: 19,
+    turma: "A",
+    notas: [6.5, 7.0, 8.0]
+  },
+  {
+    nome: "Ana Souza",
+    idade: 16,
+    turma: "C",
+    notas: [8.0, 7.5, 7.0]
+  },
+  {
+    nome: "Lucas Ferreira",
+    idade: 21,
+    turma: "B",
+    notas: [10.0, 9.0, 9.5]
+  },
+  {
+    nome: "Janete Klauss",
+    idade: 21,
+    turma: "A",
+    notas: [6.0, 9.0, 10.0]
+  },
+  {
+    nome: "Estebán Lopez",
+    idade: 15,
+    turma: "B",
+    notas: [6.0, 9.0, 10.0]
+  },
+  {
+    nome: "Cássio Araújo",
+    idade: 19,
+    turma: "C",
+    notas: [9.5, 10.0, 9.0]
+  }
+])
+
+db.alunos.find({ turma: "B" })
+db.alunos.find({ nome: "Lucas Ferreira" })
+db.alunos.updateOne(
+  { nome: "Lucas Ferreira" },
+  { $set: { notas: [6.5, 9.5, 10.0] } }
+)
+db.alunos.find({ nome: "Lucas Ferreira" })
+
+db.alunos.find( { idade: { $lt: 18 } } )
+db.alunos.find()
+db.alunos.deleteMany({ turma: "C" })
+db.alunos.find()

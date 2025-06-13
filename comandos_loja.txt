@@ -132,3 +132,68 @@ db.clientes.deleteOne({ email: "cgaegers@email.com" })
 db.clientes.find()
 
 Testar 3.1 e 3.2 em casa
+
+{
+  "nome": "Notebook",
+  "preco": 3500,
+  "estoque": 10,
+  "categoria": "Eletrônicos"
+}
+
+db.produtos.insertOne({
+  nome: "Smartphone",
+  preco: 2000,
+  estoque: 25,
+  categoria: "Celulares"
+})
+
+db.produtos.insertMany([
+  {
+    nome: "Tablet",
+    preco: 1500,
+    estoque: 8,
+    categoria: "Eletrônicos"
+  },
+  {
+    nome: "ApplePhone",
+    preco: 15000,
+    estoque: 3,
+    categoria: "Eletrônicos"
+  },
+  {
+    nome: "Fone de Ouvido",
+    preco: 200,
+    estoque: 50,
+    categoria: "Acessórios"
+  },
+  {
+    nome: "Cabo USB",
+    preco: 20,
+    estoque: 500,
+    categoria: "Acessórios"
+  }
+])
+
+{ categoria: "Eletrônicos" }
+db.produtos.find({})
+db.produtos.find({ categoria: "Celulares" })
+db.produtos.find({ categoria: "Celulares", preco: { $gt: 10000 } })
+db.produtos.find({ categoria: "Acessórios" })
+
+db.produtos.updateOne(
+  { nome: "Cabo USB" },
+  { $set: { preco: 13 } },
+  { $set: { estoque: 400 } }
+)
+
+db.produtos.find({ nome: "Cabo USB" })
+db.produtos.find({ categoria: "Acessórios" })
+db.produtos.updateMany(
+  { categoria: "Acessórios" },
+  { $set: { disponivel: true } }
+)
+
+db.produtos.find({ categoria: "Acessórios" })
+db.produtos.deleteOne({ nome: "Fone de Ouvido" })
+db.produtos.deleteMany({ categoria: "Celulares" })
+db.produtos.find({})
