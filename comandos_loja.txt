@@ -197,3 +197,32 @@ db.produtos.find({ categoria: "Acessórios" })
 db.produtos.deleteOne({ nome: "Fone de Ouvido" })
 db.produtos.deleteMany({ categoria: "Celulares" })
 db.produtos.find({})
+
+db.produtos.insertMany([
+  { "nome": "Notebook", "preco": 3500, "categoria": "Eletrônicos", "estoque": 10 },
+  { "nome": "Mouse", "preco": 80, "categoria": "Acessórios", "estoque": 50 },
+  { "nome": "Teclado", "preco": 150, "categoria": "Acessórios", "estoque": 30 },
+  { "nome": "Smartphone", "preco": 2500, "categoria": "Celulares", "estoque": 20 }
+])
+
+db.clientes.find({ "idade": { "$gt": 29 } })
+db.clientes.find({ "idade": { "$lt": 30 } })
+db.clientes.find({ "cidade": { "$in": ["São Paulo", "Rio de Janeiro"] } }).limit(2)
+db.clientes.find({ "cidade": { "$in": ["São Paulo", "Rio de Janeiro"] } })
+db.clientes.find({
+  "$or": [
+    { "idade": { "$lt": 25 } },
+    { "cidade": "São Paulo"}
+  ]
+}).limit(5)
+db.clientes.find({
+  "idade": { "$gt": 25, "$lt": 40 }
+}).limit(3)
+
+db.clientes.createIndex({ "email": 1 })
+db.clientes.createIndex({ "cidade": 1, "idade": -1 })
+db.clientes.find({ "cidade": "São Paulo", "idade": { "$gt": 30 } })
+db.clientes.getIndexes()
+db.clientes.find({ "email": "joaosilva@email.com" }).explain("executionStats")
+db.clientes.find({ "cidade": "São Paulo" }).explain("executionStats")
+db.clientes.find({ "Nome": "Carlos Pereira" }).explain("executionStats")

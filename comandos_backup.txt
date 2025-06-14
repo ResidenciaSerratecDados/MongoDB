@@ -1,0 +1,8 @@
+.\mongodump --version
+.\mongorestore.exe --version
+.\mongodump --uri="mongodb+srv://murilodores@cluster-uc1.vmrsplf.mongodb.net/loja" --out ./backup/
+
+mongosh "mongodb+srv://cluster-uc1.vmrsplf.mongodb.net/" --apiVersion 1 --username murilodores
+copiar pasta de backup do drive para: ...\MongoApps\mongodb-database-tools\bin
+
+.\mongorestore --uri="mongodb+srv://murilodores@cluster-uc1.vmrsplf.mongodb.net/lojaRestaurado" ./backup/loja/
